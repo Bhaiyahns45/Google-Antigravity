@@ -10,7 +10,7 @@
     -   **Tech Agent**: Expert in code, debugging, and technical explanations.
     -   **Generalist Agent**: Handles casual conversation and general knowledge.
 -   **Premium UI**: A "gravity-defying" interface with glassmorphism, neon accents, and smooth animations.
--   **Powered by Gemini**: Utilizes `gemini-1.5-flash` for fast and accurate responses.
+-   **Powered by Gemini**: Utilizes `gemini-2.5-flash` for fast and accurate responses.
 
 ## 🚀 Getting Started
 
