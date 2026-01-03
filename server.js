@@ -61,6 +61,40 @@ async function routeQuery(query) {
     }
 }
 
+// Tool Definition
+const calculatorTool = {
+    functionDeclarations: [
+        {
+            name: "calculate",
+            description: "Performs mathematical calculations. Use this for any math questions.",
+            parameters: {
+                type: "OBJECT",
+                properties: {
+                    expression: {
+                        type: "STRING",
+                        description: "The mathematical expression to evaluate (e.g., '2 + 2', 'sqrt(16)').",
+                    },
+                },
+                required: ["expression"],
+            },
+        },
+    ],
+};
+
+// Tool Implementation
+const tools = {
+    calculate: ({ expression }) => {
+        try {
+            // Safety: Using Function constructor is safer than eval, but still risky in prod.
+            // For a demo, it's acceptable. In prod, use a math parser library.
+            const result = new Function('return ' + expression)();
+            return { result: result };
+        } catch (error) {
+            return { error: "Invalid expression" };
+        }
+    }
+};
+
 // Chat Endpoint
 app.post('/api/chat', async (req, res) => {
     const { message } = req.body;
@@ -74,15 +108,54 @@ app.post('/api/chat', async (req, res) => {
         const selectedAgent = await routeQuery(message);
         console.log(`Routing "${message}" to ${selectedAgent.name}`);
 
-        // 2. Generate response using the selected agent
-        const agentModel = genAI.getGenerativeModel({
-            model: "gemini-2.5-flash",
-            systemInstruction: selectedAgent.instruction
-        });
+        // 2. Configure model with tools if it's the Tech Agent
+        let agentModel;
+        let chat;
 
-        const result = await agentModel.generateContent(message);
-        const response = await result.response;
-        const text = response.text();
+        if (selectedAgent.role === 'tech') {
+            agentModel = genAI.getGenerativeModel({
+                model: "gemini-2.5-flash",
+                systemInstruction: selectedAgent.instruction,
+                tools: [calculatorTool],
+            });
+            chat = agentModel.startChat();
+        } else {
+            agentModel = genAI.getGenerativeModel({
+                model: "gemini-2.5-flash",
+                systemInstruction: selectedAgent.instruction
+            });
+            chat = agentModel.startChat();
+        }
+
+        // 3. Send message
+        let result = await chat.sendMessage(message);
+        let response = await result.response;
+        let text = response.text();
+
+        // 4. Handle Function Calls
+        const functionCalls = response.functionCalls();
+        if (functionCalls && functionCalls.length > 0) {
+            const call = functionCalls[0];
+            const functionName = call.name;
+            const args = call.args;
+
+            if (functionName === 'calculate') {
+                const toolResult = tools.calculate(args);
+                console.log(`Tool Call: calculate(${args.expression}) = ${toolResult.result}`);
+
+                // Send result back to model
+                result = await chat.sendMessage([
+                    {
+                        functionResponse: {
+                            name: 'calculate',
+                            response: toolResult
+                        }
+                    }
+                ]);
+                response = await result.response;
+                text = response.text();
+            }
+        }
 
         res.json({
             response: text,
