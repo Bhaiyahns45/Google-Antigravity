@@ -1,5 +1,8 @@
 # Google Antigravity - Agentic AI System
 
+<img width="225" height="225" alt="image" src="https://github.com/user-attachments/assets/fd0a3d25-3642-4af8-bd16-194382150501" />
+
+
 **Google Antigravity** is a next-generation AI IDE demo powered by Google's Gemini model. It demonstrates the "Agent-First" development philosophy, where a **Router Agent** intelligently directs queries to specialized sub-agents and manages your editor, terminal, and browser autonomously.
 
 ## 🌌 Features
