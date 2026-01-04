@@ -1,16 +1,44 @@
 # Google Antigravity - Agentic AI System
 
-**Google Antigravity** is a multi-agent AI application powered by Google's Gemini model. It demonstrates the power of agentic workflows by using a **Router Agent** to intelligently direct user queries to specialized sub-agents.
+**Google Antigravity** is a next-generation AI IDE demo powered by Google's Gemini model. It demonstrates the "Agent-First" development philosophy, where a **Router Agent** intelligently directs queries to specialized sub-agents and manages your editor, terminal, and browser autonomously.
 
 ## 🌌 Features
 
 -   **Multi-Agent Architecture**:
-    -   **Router Agent**: Analyzes intent and routes queries.
-    -   **Creative Agent**: Specializes in poetry, storytelling, and abstract ideas.
-    -   **Tech Agent**: Expert in code, debugging, and technical explanations.
-    -   **Generalist Agent**: Handles casual conversation and general knowledge.
+    -   **Router Agent**: Analyzes intent and routes queries to the correct expert.
+    -   **Tech Agent**: Expert in code generation, debugging, and terminal execution.
+    -   **Creative Agent**: Handles abstract ideas, design, and storytelling.
+-   **Dual-Surface Interface**: 
+    -   **Editor Surface**: A familiar VS Code-like environment for hands-on coding.
+    -   **Manager Surface**: A "Mission Control" for spawning and orchestrating autonomous agents.
 -   **Premium UI**: A "gravity-defying" interface with glassmorphism, neon accents, and smooth animations.
--   **Powered by Gemini**: Utilizes `gemini-2.5-flash` for fast and accurate responses.
+
+## ⌨️ Shortcuts & Controls
+
+Master the Antigravity interface with these essential keyboard shortcuts.
+
+### ⚡ Essentials
+| Action | macOS | Windows/Linux |
+| :--- | :--- | :--- |
+| **Toggle Agent Panel** | `Cmd + L` | `Ctrl + L` |
+| **Inline Command** (AI Edit) | `Cmd + I` | `Ctrl + I` |
+| **Toggle Terminal** | `Ctrl + ` ` | `Ctrl + ` ` |
+| **Settings** | `Cmd + ,` | `Ctrl + ,` |
+
+### 🧠 Mode Switching
+Antigravity features distinct modes for different workflows.
+
+| Action | macOS | Windows/Linux | Description |
+| :--- | :--- | :--- | :--- |
+| **Toggle Editor/Agent** | `Cmd + E` | `Ctrl + E` | Switch between code focus and agent chat. |
+| **Switch to Manager View** | `Cmd + Shift + M` | `Ctrl + Shift + M` | Open the "Mission Control" to manage multiple agents. |
+
+### 💬 Agent Triggers (Verbal Shortcuts)
+Use these keywords at the start of your prompt to force specific routing behavior:
+
+* **Tech/Code**: `Code`, `Debug`, `Function`, `API`, `Script`
+* **Creative**: `Imagine`, `Story`, `Design`, `Write`
+* **General**: `Explain`, `Define`, `Summary`
 
 ## 🚀 Getting Started
 
@@ -23,7 +51,7 @@
 
 1.  **Clone the repository**:
     ```bash
-    git clone https://github.com/Bhaiyahns45/Google-Antigravity.git
+    git clone [https://github.com/Bhaiyahns45/Google-Antigravity.git](https://github.com/Bhaiyahns45/Google-Antigravity.git)
     cd Google-Antigravity
     ```
 
@@ -46,22 +74,6 @@
 
 5.  **Open in Browser**:
     Visit `http://localhost:3000` to interact with the agents.
-
-## 🧠 How It Works
-
-1.  **User Input**: You send a message via the chat interface.
-2.  **Routing**: The backend sends your message to the **Router Agent** (a specialized Gemini prompt).
-3.  **Decision**: The Router decides if the intent is `creative`, `tech`, or `general`.
-4.  **Execution**: The system selects the corresponding **Sub-Agent** (with a specific system instruction) to generate the final response.
-5.  **Response**: The response is displayed in the UI, tagged with the agent that handled it.
-
-## 🎨 Design
-
-The "Antigravity" theme features:
--   **Deep Space Background**: Dark, immersive colors.
--   **Floating Orbs**: Animated background elements.
--   **Glassmorphism**: Translucent cards and inputs.
--   **Google Colors**: Subtle neon accents representing the Google brand.
 
 ---
 
